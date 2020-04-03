@@ -179,6 +179,7 @@ class ProxyHandler(WebSocketHandlerMixin, IPythonHandler):
         req = httpclient.HTTPRequest(
             client_uri, method=self.request.method, body=body,
             headers=headers, **self.proxy_request_options())
+        print(headers)
         return req
 
     def _check_host_whitelist(self, host):
