@@ -167,6 +167,8 @@ class ProxyHandler(WebSocketHandlerMixin, IPythonHandler):
 
         # set the X-RStudioUserIdentity header
         headers['X-RStudioUserIdentity'] = "jovyan"
+        print("Just after setting")
+        print(headers)
 
         client_uri = self.get_client_uri('http', host, port, proxied_path)
         # Some applications check X-Forwarded-Context and X-ProxyContextPath
@@ -176,9 +178,12 @@ class ProxyHandler(WebSocketHandlerMixin, IPythonHandler):
             headers['X-Forwarded-Context'] = context_path
             headers['X-ProxyContextPath'] = context_path
 
+        print("checking headers before")
+        print(headers)
         req = httpclient.HTTPRequest(
             client_uri, method=self.request.method, body=body,
             headers=headers, **self.proxy_request_options())
+        print("checking headers after")
         print(headers)
         return req
 
